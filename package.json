@@ -1,15 +1,24 @@
 {
   "name": "cumtb-metro-test",
   "version": "0.1.0",
+  "description": "智慧地铁管理系统",
+  "author": "韩啸",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build:prod": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@jiaminghi/data-view": "^2.10.0",
+    "axios": "^0.21.4",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "echarts": "^5.2.1",
+    "element-ui": "^2.15.6",
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.2",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -18,6 +27,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "sass": "1.32.0",
+    "sass-loader": "10.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
