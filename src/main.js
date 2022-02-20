@@ -11,6 +11,7 @@ Vue.use(Element)
 
 import store from "@/store";
 
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -18,7 +19,7 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app')
-
+// 100px=1rem
 const setHtmlFontSize = () => {
   const htmlDom = document.getElementsByTagName('html')[0];
   let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
