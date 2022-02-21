@@ -1,6 +1,6 @@
 <template>
-  <div class="alarm">
-    map
+  <div class="mappic">
+    <img src="../../assets/界面/素材/bgimg2.png" style=" height:6.048rem">
   </div>
 </template>
 
@@ -17,5 +17,8 @@ export default {
 </script>
 
 <style scoped>
-
+.mappic {
+height: auto;
+  width: auto;
+}
 </style>

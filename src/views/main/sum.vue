@@ -1,6 +1,5 @@
 <template>
-  <div class="alarm">
-    sum
+  <div class="sum">
   </div>
 </template>
 
@@ -17,5 +16,10 @@ export default {
 </script>
 
 <style scoped>
-
+.sum {
+  /*background-image: url("../../assets/event.png");*/
+  /*background-size: cover;*/
+  /*width: 7.09rem;*/
+  /*height: 4.72rem;*/
+}
 </style>
