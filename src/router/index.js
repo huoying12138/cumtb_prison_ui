@@ -5,6 +5,8 @@ import Main from '@/views/main/index'
 import Event from "../views/event";
 import emergency from "../views/emergency";
 
+import rank from "../views/main/rank";
+
 Vue.use(Router)
 
 import test from '@/components/tets'
@@ -30,6 +32,10 @@ export const constantRoutes = [
     {
         path: '/emergency',
         component: emergency
+    },
+    {
+        path: '/test',
+        component: rank
     }
 ]
 

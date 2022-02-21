@@ -1,22 +1,119 @@
 <template>
-  <div class="alarm">
-    rank
-  </div>
-
+  <div id="chartPie" class="pie-wrap"></div>
 </template>
 
 <script>
+import * as echarts from 'echarts';
+
+require('echarts/theme/macarons');//引入主题
+
 export default {
-  name: "rank",
-  props: {},
-  components: {},
   data() {
-    return {}
+    return {
+      chartPie: null
+    }
   },
-  methods: {},
+  mounted() {
+    this.$nextTick(() => {
+      this.drawPieChart();
+    })
+  },
+  methods: {
+    drawPieChart() {
+      this.chartPie = echarts.init(document.getElementById('chartPie'), 'macarons');
+      this.chartPie.setOption({
+        series: [
+          {
+            type: 'gauge',
+            startAngle: 180,
+            endAngle: 0,
+            min: 0,
+            max: 1,
+            splitNumber: 8,
+            axisLine: {
+              lineStyle: {
+                width: 6,
+                color: [
+                  [0.25, '#FF6E76'],
+                  [0.5, '#FDDD60'],
+                  [0.75, '#58D9F9'],
+                  [1, '#7CFFB2']
+                ]
+              }
+            },
+            radius: "90%",
+            pointer: {
+              icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+              length: '12%',
+              width: 20,
+              offsetCenter: [0, '-60%'],
+              itemStyle: {
+                color: 'auto'
+              }
+            },
+            axisTick: {
+              length: 12,
+              lineStyle: {
+                color: 'auto',
+                width: 2
+              }
+            },
+            splitLine: {
+              length: 20,
+              lineStyle: {
+                color: 'auto',
+                width: 5
+              }
+            },
+            axisLabel: {
+              color: '#ffffff',
+              fontSize: 20,
+              distance: -60,
+              formatter: function (value) {
+                if (value === 0.875) {
+                  return 'A';
+                } else if (value === 0.625) {
+                  return 'B';
+                } else if (value === 0.375) {
+                  return 'C';
+                } else if (value === 0.125) {
+                  return 'D';
+                }
+                return '';
+              }
+            },
+            title: {
+              offsetCenter: [0, '40%'],
+              fontSize: 40,
+              color: '#ffffff',
+            },
+            detail: {
+              fontSize: 50,
+              offsetCenter: [0, '0%'],
+              valueAnimation: true,
+              formatter: function (value) {
+                return Math.round(value * 100) + '分';
+              },
+              color: 'auto'
+            },
+            data: [
+              {
+                value: 0.7,
+                name: '安全等级'
+              }
+            ]
+          }
+        ]
+      });
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style scope>
+.pie-wrap {
+  width: 100%;
+  height:3.24rem;
+  padding-top: 0.3rem;
+}
 </style>

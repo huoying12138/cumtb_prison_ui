@@ -25,9 +25,9 @@
         </dv-border-box-10>
       </div>
       <div class="footer-right">
-        <dv-border-box-10>
+<!--        <dv-border-box-10>-->
           <rank></rank>
-        </dv-border-box-10>
+<!--        </dv-border-box-10>-->
       </div>
     </div>
   </div>
