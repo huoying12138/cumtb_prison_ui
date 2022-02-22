@@ -1,6 +1,6 @@
 <template>
-  <div class="alarm">
-    emergency
+  <div class="content">
+    <div class="index"></div>
   </div>
 </template>
 
@@ -17,5 +17,14 @@ export default {
 </script>
 
 <style scoped>
-
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 10.8rem;
+  width: 19.2rem;
+  /*height: 1080px;*/
+  /*width: 1920px;*/
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+}
 </style>
