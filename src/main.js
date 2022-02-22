@@ -7,6 +7,7 @@ import dataV from '@jiaminghi/data-view'
 Vue.use(dataV)
 
 import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(Element)
 
 import store from "@/store";
