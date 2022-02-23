@@ -5,13 +5,14 @@
 </template>
 
 <script>
-
+import 'element-ui/lib/theme-chalk/index.css';
+// import './assets/global.css'
 export default {
   name: 'App',
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

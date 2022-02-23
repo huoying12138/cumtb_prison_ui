@@ -1,18 +1,86 @@
 <template>
   <div class="content">
-    <div class="index"></div>
+    <div class="first-row">
+      <div class="f-left">
+        <h2>
+          <i class="el-icon-folder-opened">应急处置档案管理</i>
+        </h2>
+      </div>
+      <div class="f-right">
+        <el-form :inline="true" :model="formInline" class="demo-form-inline">
+          <el-form-item label="档案类别">
+            <el-select v-model="formInline.type" placeholder="档案类别">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="档案等级">
+            <el-select v-model="formInline.level" placeholder="档案等级">
+              <el-option label="001" value="001"></el-option>
+              <el-option label="002" value="002"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onReset">重置</el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onCreate">新建档案</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+    <div class="second-row">
+      <emergencyTable/>
+    </div>
   </div>
 </template>
 
 <script>
+import emergencyTable from '@/components/emergencyTable'
+
+
 export default {
   name: "index",
   props: {},
-  components: {},
+  components: {emergencyTable,},
   data() {
-    return {}
+    return {
+      formInline: {
+        time: '',
+        id: ''
+      }
+    }
   },
-  methods: {},
+  methods: {
+    onSubmit() {
+      let msg = "请确认！";
+      if (confirm(msg)==true){
+        return  true;
+      }else{
+        return false;
+      }
+    },
+    onReset() {
+      let msg = "请确认！";
+      if (confirm(msg)==true){
+        return  true;
+      }else{
+        return false;
+      }
+    },
+    onCreate() {
+      let msg = "请确认！";
+      if (confirm(msg)==true){
+        return  true;
+      }else{
+        return false;
+      }
+    },
+
+  }
 }
 </script>
 
@@ -26,5 +94,38 @@ export default {
   /*width: 1920px;*/
   background-image: url("../../assets/background.png");
   background-size: cover;
+  font-size: 0.3rem;
 }
+.first-row {
+  width: 95%;
+  margin: 5% 2.5% 0 2.5%;
+}
+.f-left {
+  float: left;
+  color: white;
+}
+.f-right {
+  margin-top: 2.5%;
+  float: right;
+}
+.second-row {
+  width: 95%;
+  background-color: white;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>
+<style lang="scss">
+.el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
+  font-size: 0.3rem;
+  height: 0.5rem;
+}
+.el-input__inner{
+  width: 3rem;
+}
+.el-form-item__label {
+  color: white;
+}
+
+
 </style>

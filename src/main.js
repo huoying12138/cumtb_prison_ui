@@ -9,6 +9,8 @@ Vue.use(dataV)
 import Element from 'element-ui'
 Vue.use(Element)
 
+// import "./assets/global.css"
+
 import store from "@/store";
 
 

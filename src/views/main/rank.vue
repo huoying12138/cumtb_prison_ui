@@ -110,7 +110,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .pie-wrap {
   width: 100%;
   height:3.24rem;
