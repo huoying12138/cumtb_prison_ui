@@ -27,7 +27,8 @@
             <el-button type="primary" @click="onReset">重置</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onCreate">新建档案</el-button>
+            <el-button type="primary" @click="centerDialogVisible = true">新建档案</el-button>
+
           </el-form-item>
         </el-form>
       </div>
@@ -35,19 +36,30 @@
     <div class="second-row">
       <emergencyTable/>
     </div>
+    <div class="third-row">
+      <el-dialog
+          title="输入档案信息："
+          :visible.sync="centerDialogVisible"
+          width="40%"
+          center>
+        <create-document/>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
 import emergencyTable from '@/components/emergencyTable'
+import createDocument from '@/components/createDocument'
 
 
 export default {
   name: "index",
   props: {},
-  components: {emergencyTable,},
+  components: {emergencyTable,createDocument},
   data() {
     return {
+      centerDialogVisible: false,
       formInline: {
         time: '',
         id: ''
@@ -115,16 +127,19 @@ export default {
   text-align: center;
 }
 </style>
-<style lang="scss">
-.el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
-  font-size: 0.3rem;
-  height: 0.5rem;
-}
-.el-input__inner{
-  width: 3rem;
-}
-.el-form-item__label {
-  color: white;
+<style lang="scss" >
+.first-row {
+  .el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
+    font-size: 0.3rem;
+    height: 0.5rem;
+  }
+  .el-input__inner{
+    width: 3rem;
+  }
+  .el-form-item__label {
+    color: white;
+  }
+
 }
 
 

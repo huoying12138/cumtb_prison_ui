@@ -106,12 +106,14 @@ export default {
 }
 </style>
 <style lang="scss">
-.el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
-  font-size: 0.3rem;
-  height: 0.5rem;
-}
-.el-form-item__label {
-  color: white;
+.first-row{
+  .el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
+    font-size: 0.3rem;
+    height: 0.5rem;
+  }
+  .el-form-item__label {
+    color: white;
+  }
 }
 
 

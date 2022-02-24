@@ -9,7 +9,7 @@ import rank from "../views/main/rank";
 
 Vue.use(Router)
 
-import test from '@/components/tets'
+import test from '@/components/createDocument'
 
 
 export const constantRoutes = [
