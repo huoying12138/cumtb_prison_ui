@@ -1,9 +1,21 @@
 <template>
   <div class="content">
+    <div class="header">
+      <div class="nav" style="float: right;">
+        <el-button-group>
+          <el-button @click="$router.push({path: '/main'})" icon="el-icon-s-home" style="font-size: 0.3rem;">首页</el-button>
+          <el-button @click="$router.push({path: '/emergency'})" icon="el-icon-folder-opened" style="font-size: 0.3rem;">应急档案管理</el-button>
+          <el-button @click="$router.push({path: '/event'})" icon="el-icon-document" style="font-size: 0.3rem;">事件记录管理</el-button>
+        </el-button-group>
+      </div>
+      <div class="user">
+
+      </div>
+    </div>
     <div class="event-first-row">
       <div class="f-left">
         <h2>
-        <i class="el-icon-folder-opened">事件识别记录管理</i>
+        <i class="el-icon-document">事件识别记录管理</i>
         </h2>
       </div>
       <div class="f-right">
@@ -86,9 +98,13 @@ export default {
   background-size: cover;
   font-size: 0.3rem;
 }
+.header{
+  height: 1rem;
+  line-height: 1rem;
+}
 .event-first-row {
   width: 95%;
-  margin: 5% 2.5% 0 2.5%;
+  margin: 0 2.5%;
 }
 .f-left {
   margin-top: 2%;
