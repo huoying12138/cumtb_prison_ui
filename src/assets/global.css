@@ -1,6 +1,7 @@
 /*.el-table  .cell {*/
 /*    line-height: 0.3rem;*/
 /*}*/
-.el {
-    font-size: 0.4rem;
+* {
+    margin: 0;
+    padding: 0;
 }

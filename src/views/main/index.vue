@@ -20,9 +20,7 @@
         </dv-border-box-11>
       </div>
       <div class="footer-center">
-        <dv-border-box-10>
           <trend></trend>
-        </dv-border-box-10>
       </div>
       <div class="footer-right">
 <!--        <dv-border-box-10>-->
@@ -52,7 +50,7 @@ export default {
 </script>
 
 
-<style scoped >
+<style scoped lang="scss">
 
 .demo {
   display: flex;
@@ -61,6 +59,11 @@ export default {
   width: 19.2rem;
   background-image: url("../../assets/background.png");
   background-size: cover;
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
+  /*transform-origin: left top;*/
 }
 /*.demo div{*/
 /*  flex: 1;*/
@@ -99,6 +102,11 @@ export default {
   height: 3.24rem;
   text-align: center;
   margin: 0 2% 0 0;
+  .line-wrap {
+    width: 100%;
+    height: 3.2rem;
+    padding-top: 0rem;
+  }
 }
 
 .footer-right {

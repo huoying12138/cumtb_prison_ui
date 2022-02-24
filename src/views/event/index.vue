@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="first-row">
+    <div class="event-first-row">
       <div class="f-left">
         <h2>
         <i class="el-icon-folder-opened">事件识别记录管理</i>
@@ -86,11 +86,12 @@ export default {
   background-size: cover;
   font-size: 0.3rem;
 }
-.first-row {
+.event-first-row {
   width: 95%;
   margin: 5% 2.5% 0 2.5%;
 }
 .f-left {
+  margin-top: 2%;
   float: left;
   color: white;
 }
@@ -106,7 +107,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.first-row{
+.event-first-row{
   .el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
     font-size: 0.3rem;
     height: 0.5rem;

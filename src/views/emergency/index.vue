@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="first-row">
+    <div class="emergency-first-row">
       <div class="f-left">
         <h2>
           <i class="el-icon-folder-opened">应急处置档案管理</i>
@@ -28,7 +28,6 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="centerDialogVisible = true">新建档案</el-button>
-
           </el-form-item>
         </el-form>
       </div>
@@ -108,11 +107,12 @@ export default {
   background-size: cover;
   font-size: 0.3rem;
 }
-.first-row {
+.emergency-first-row {
   width: 95%;
   margin: 5% 2.5% 0 2.5%;
 }
 .f-left {
+  margin-top: 2%;
   float: left;
   color: white;
 }
@@ -128,7 +128,7 @@ export default {
 }
 </style>
 <style lang="scss" >
-.first-row {
+.emergency-first-row {
   .el-form-item__label,.el-select-dropdown__item,.el-input__inner,.el-button {
     font-size: 0.3rem;
     height: 0.5rem;

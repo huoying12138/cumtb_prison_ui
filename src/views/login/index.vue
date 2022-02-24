@@ -10,7 +10,7 @@
       </el-form-item>
       <el-checkbox class="checkbox1" v-model="loginForm.rememberMe">记住密码</el-checkbox>
       <el-form-item>
-        <el-button class="button">登陆</el-button>
+        <el-button class="button" @click="gotoMain">登陆</el-button>
       </el-form-item>
     </el-form>
     <!--  底部  -->
@@ -49,7 +49,13 @@ export default {
       // }
     }
   },
-  methods: {},
+  methods: {
+    gotoMain(){
+      this.$router.push({
+        path: '/main',
+      })
+    },
+  },
 }
 </script>
 
