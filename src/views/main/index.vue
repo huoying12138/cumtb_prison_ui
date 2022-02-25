@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <div class="demo" :style="scaleFun">
     <div class="header">
       <div class="nav" style="float: right;">
         <el-button-group>
@@ -56,6 +56,12 @@ export default {
   data() {
     return {}
   },
+  computed:{
+    //设置初始页面放缩比例
+    scaleFun:function () {
+      return `transform:translate(-50%, -50%) scale(1.2)`
+    }
+  },
   methods: {},
 }
 </script>
@@ -69,11 +75,10 @@ export default {
   width: 19.2rem;
   background-image: url("../../assets/background.png");
   background-size: cover;
-  /*position: absolute;*/
-  /*top: 50%;*/
-  /*left: 50%;*/
-  /*transform: translate(-50%, -50%);*/
-  /*transform-origin: left top;*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
 }
 /*.demo div{*/
 /*  flex: 1;*/

@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" :style="scaleFun">
     <el-form class="login-form"  ref="loginForm" :model="loginForm" :rules="loginRules">
       <h3 class="title">监所突发事件预警系统</h3>
       <el-form-item prop="username">
@@ -25,6 +25,12 @@ export default {
   name: "index",
   props: {},
   components: {},
+  computed:{
+    //设置初始页面放缩比例
+    scaleFun:function () {
+      return `transform:translate(-50%, -50%) scale(1.2)`
+    }
+  },
   data() {
     return {
       loginForm: {
@@ -68,6 +74,10 @@ export default {
   width: 19.2rem;
   background-image: url("../../assets/login-background.png");
   background-size: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
 }
 
 .login-form {
