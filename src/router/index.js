@@ -10,6 +10,7 @@ import emergency from "../views/emergency";
 Vue.use(Router)
 
 import test from '@/components/tets'
+import sum from '@/views/main/sum'
 
 
 export const constantRoutes = [
@@ -37,6 +38,10 @@ export const constantRoutes = [
         path: '/emergency',
         component: emergency
     },
+    {//测试sum
+        path: '/sum',
+        component: sum
+    }
 
 ]
 
