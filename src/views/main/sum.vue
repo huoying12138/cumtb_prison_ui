@@ -1,6 +1,6 @@
 <template>
   <div class="sum">
-    <div class="com-chart" ref="'sum_ref"></div>
+    <div id="pie-chart" class="sum" ref="'sum_ref"></div>
   </div>
 </template>
 
@@ -16,10 +16,12 @@ export default {
     }
   },
   mounted(){
-    this.initChart()
+    this.$nextTick(() => {
+      this.initChart()
+    })
    // this.getData()
     window.addEventListener("resize",this.screenAdapter)
-    this.screenAdapter()
+    // this.screenAdapter()
   },
 
   destroyed(){
@@ -28,9 +30,9 @@ export default {
 
   methods: {
     initChart(){
-      this.chartInstance = echarts.init(this.$refs.sum_ref)
-      const initOption = {}
-      this.chartInstance.setOption(initOption)
+      this.chartInstance = echarts.init(document.getElementById('pie-chart'))
+      // const initOption = {}
+      // this.chartInstance.setOption(initOption)
       this.updateChart()
     },
     /*async getData(){
@@ -60,7 +62,7 @@ export default {
         ['#4FF778','#0ba82c'],
       ]
       //处理图表需要的数据
-      const seriesArr = this.allData.map((item,index) => {  //7个圆环，循环遍历的索引.
+      const seriesArr = centerArr.map((item,index) => {  //7个圆环，循环遍历的索引.
         return{
           type:'pie',
           radius:[110,100],
@@ -85,16 +87,17 @@ export default {
         }
       })
       const dataOption = {
-        series:seriesArr
+        series:seriesArr,
       }
+      console.log(seriesArr)
       this.chartInstance.setOption(dataOption)
     },
 
-    screenAdapter(){  //分辨率适配
-      const adapterOption = {}
-      this.chartInstance.setOption(adapterOption)
-      this.chartInstance.resize()
-    }
+    // screenAdapter(){  //分辨率适配
+    //   const adapterOption = {}
+    //   this.chartInstance.setOption(adapterOption)
+    //   this.chartInstance.resize()
+    // }
   },
 }
 
@@ -108,6 +111,10 @@ export default {
   /*background-size: cover;*/
   /*width: 7.09rem;*/
   /*height: 4.72rem;*/
+  width:100%;
+  height:5.24rem;
+  padding-top: 0.2rem;
+  background: #ffffff;
 }
 </style>
 
