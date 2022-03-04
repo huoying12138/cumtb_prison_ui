@@ -19,7 +19,7 @@ export default {
     this.$nextTick(() => {
       this.initChart()
     })
-   // this.getData()
+    // this.getData()
     window.addEventListener("resize",this.screenAdapter)
     // this.screenAdapter()
   },
@@ -30,42 +30,40 @@ export default {
 
   methods: {
     initChart(){
-      this.chartInstance = echarts.init(document.getElementById('pie-chart'))
-      // const initOption = {}
-      // this.chartInstance.setOption(initOption)
+      this.chartInstance = echarts.init(document.getElementById('pie-chart')) //chalk
+      /*const initOption = {
+        title:{
+          text:'事件总计'
+        }
+      }
+      this.chartInstance.setOption(initOption)*/
       this.updateChart()
     },
-    /*async getData(){
-      //获取服务器数据，对this.allData进行赋值之后，调用updateChart方法来更新图表
-      const {data: ret } = await this.$http.get('event')//获取data，也就是各个事件event
-      this.allData = ret
-      console.log(this.allData)
 
-    },*/
-     updateChart(){
+    updateChart(){
       const centerArr = [
-          ['18%','40%'],
-          ['30%','40%'],
-          ['62%','40%'],
-          ['85%','40%'],
-          ['18%','75%'],
-          ['30%','75%'],
-          ['62%','75%'],
+        ['18%','13%'],
+        ['40%','13%'],
+        ['62%','13%'],
+        ['85%','13%'],
+        ['18%','40%'],
+        ['40%','40%'],
+        ['62%','40%'],
       ]
       const colorArr = [
-        ['#4FF778','#0ba82c'],
-        ['#E5DD45','#E8B11C'],
-        ['#E8821C','#E55445'],
+        ['#90F7EC','#32CCBC'],
+        ['#FAD7A1','#E96D71'],
         ['#5052EE','#AB6EE5'],
+        ['#E5DD45','#E8B11C'],
         ['#23E5E5','#2E728F'],
-        ['#4FF778','#0ba82c'],
-        ['#4FF778','#0ba82c'],
+        ['#FCCF31','#F55555'],
+        ['#81FBB8','#28C76F'],
       ]
       //处理图表需要的数据
       const seriesArr = centerArr.map((item,index) => {  //7个圆环，循环遍历的索引.
         return{
           type:'pie',
-          radius:[110,100],
+          radius:[50,60],
           center:centerArr[index],
           hoverAnimation:false,//关闭鼠标移入到饼图时的动画效果
           labelLine: {
@@ -75,14 +73,25 @@ export default {
             position: 'center', //字放中间
             color: colorArr[index][0] //变字体的颜色
           },
+
           data: [
-            { value: 300 },
-            { value: 300 },
-            { value: 300 },
-            { value: 300 },
-            { value: 300 },
-            { value: 300 },
-            { value: 300 },
+            {
+              name:'人员逃脱' + '\n' + '\n'+'20',  //不同事件则用变量名 item.name+item.number
+              value: 100, //接入后台数据，可将value写成item.number,number代表传入的数字的变量名
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 1, 0, 0,[
+                  {
+                    offset: 0,
+                    color:colorArr[index][0]
+                  },
+                  {
+                    offset: 1,
+                    color:colorArr[index][1]
+                  }
+
+                ])
+              }
+            },
           ]
         }
       })
@@ -117,23 +126,3 @@ export default {
   background: #ffffff;
 }
 </style>
-
-
-/*  UI的调整
-{
-name: item.name + '\n'+item.event, //event对应”事件“传过来的参数
-value: item.event, //对应
-itemStyle:{
-color: new echarts.graphic.LinearGradient(0, 1, 0, 0 [
-{
-offset: 0,
-color:colorArr[index][0]
-},
-{
-offset: 1,
-color:colorArr[index][1]
-}
-])
-}
-},
-*/
