@@ -26,7 +26,7 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+          data:['事件趋势','事件分析','预警分析','报警趋势','报警分析']
         },
         calculable : true,
         xAxis : [
@@ -45,36 +45,36 @@ export default {
             axisTick: {
               show: false
             },
-            name: '（人）'
+            name: '（件）'
           }
         ],
         series : [
           {
-            name:'邮件营销',
+            name:'事件趋势',
             type:'line',
             stack: '总量',
             data:[120, 132, 101, 134, 90, 230, 210]
           },
           {
-            name:'联盟广告',
+            name:'事件分析',
             type:'line',
             stack: '总量',
             data:[220, 182, 191, 234, 290, 330, 310]
           },
           {
-            name:'视频广告',
+            name:'预警分析',
             type:'line',
             stack: '总量',
             data:[150, 232, 201, 154, 190, 330, 410]
           },
           {
-            name:'直接访问',
+            name:'报警趋势',
             type:'line',
             stack: '总量',
             data:[320, 332, 301, 334, 390, 330, 320]
           },
           {
-            name:'搜索引擎',
+            name:'报警分析',
             type:'line',
             stack: '总量',
             data:[820, 932, 901, 934, 1290, 1330, 1320]
