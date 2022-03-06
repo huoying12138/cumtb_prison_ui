@@ -5,7 +5,6 @@
 
 <script>
 import * as echarts from 'echarts';
-require('echarts/theme/shine');//引入主题
 
 export default {
   data() {
@@ -20,8 +19,9 @@ export default {
   },
   methods: {
     drawLineChart() {
-      this.chartLine = echarts.init(this.$el,'shine');// 基于准备好的dom，初始化echarts实例
+      this.chartLine = echarts.init(this.$el, 'dark');// 基于准备好的dom，初始化echarts实例
       let option = {
+        backgroundColor:'transparent',
         tooltip : {
           trigger: 'axis'
         },
@@ -92,8 +92,9 @@ export default {
 .line-wrap{
   width:100%;
   height:3.24rem;
-  padding-top: 0.2rem;
-  background: #ffffff;
+  /*padding-top: 0.2rem;*/
+  /*去掉背景色*/
+  /*background: #ffffff;*/
   /*border-radius: 0.5rem;*/
 }
 </style>

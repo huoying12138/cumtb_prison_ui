@@ -31,24 +31,22 @@ export default {
   methods: {
     initChart(){
       this.chartInstance = echarts.init(document.getElementById('pie-chart')) //chalk
-      /*const initOption = {
-        title:{
-          text:'事件总计'
-        }
+      const initOption = {
+        // backgroundColor:'transparent',
       }
-      this.chartInstance.setOption(initOption)*/
+      this.chartInstance.setOption(initOption)
       this.updateChart()
     },
 
     updateChart(){
       const centerArr = [
-        ['18%','13%'],
-        ['40%','13%'],
-        ['62%','13%'],
-        ['85%','13%'],
-        ['18%','40%'],
-        ['40%','40%'],
-        ['62%','40%'],
+        ['18%','36%'],
+        ['40%','36%'],
+        ['62%','36%'],
+        ['85%','36%'],
+        ['18%','76%'],
+        ['40%','76%'],
+        ['62%','76%'],
       ]
       const colorArr = [
         ['#90F7EC','#32CCBC'],
@@ -121,8 +119,9 @@ export default {
   /*width: 7.09rem;*/
   /*height: 4.72rem;*/
   width:100%;
-  height:5.24rem;
-  padding-top: 0.2rem;
-  background: #ffffff;
+  height:3.2rem;
+  /*padding-top: 0.2rem;*/
+  /*去掉背景色*/
+  /*background: #ffffff;*/
 }
 </style>

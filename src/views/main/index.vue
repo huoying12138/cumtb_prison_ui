@@ -104,6 +104,7 @@ export default {
 .footer-left {
   width: 30%;
   height: 3.24rem;
+  //height: 100%;
   text-align: center;
   margin: 0 2% 0 3%;
 }

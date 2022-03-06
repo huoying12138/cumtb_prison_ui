@@ -114,6 +114,6 @@ export default {
 .pie-wrap {
   width: 100%;
   height:3.24rem;
-  padding-top: 0.3rem;
+  /*padding-top: 0.3rem;*/
 }
 </style>
