@@ -1,6 +1,5 @@
 'use strict'
 const path = require('path')
-
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
@@ -8,7 +7,7 @@ function resolve(dir) {
 const name = process.env.VUE_APP_TITLE || '智慧地铁测试项目'
 
 const host = '0.0.0.0'
-const port = 80
+const port = 8081
 
 module.exports = {
     // 部署生产环境和开发环境下的URL。
@@ -23,6 +22,7 @@ module.exports = {
     lintOnSave: process.env.NODE_ENV === 'development',
     // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
     productionSourceMap: false,
+
     // webpack-dev-server 相关配置
     devServer: {
         host: host,
@@ -30,12 +30,14 @@ module.exports = {
         open: true,
         proxy: {
             // detail: https://cli.vuejs.org/config/#devserver-proxy
-            [process.env.VUE_APP_BASE_API]: {
-                target: `http://localhost:8087`,
+            [process.env.VUE_APP_BASE_API + '/*']: {
+                target: `http://localhost:8989`,
+                // target: `http://159.75.119.187:8989`,
                 changeOrigin: true,
                 pathRewrite: {
                     ['^' + process.env.VUE_APP_BASE_API]: ''
-                }
+                },
+                secure: false
             }
         },
         disableHostCheck: true

@@ -56,14 +56,16 @@ export default {
   data() {
     return {}
   },
+
   computed:{
     //设置初始页面放缩比例
     scaleFun:function () {
       return `transform:translate(-50%, -50%) scale(1.2)`
-    }
+    },
   },
   methods: {},
 }
+
 </script>
 
 

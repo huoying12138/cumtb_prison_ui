@@ -14,7 +14,6 @@ import "./assets/global.css"
 
 import store from "@/store";
 
-
 Vue.config.productionTip = false
 
 new Vue({
@@ -36,3 +35,5 @@ const setHtmlFontSize = () => {
 };
 window.onresize = setHtmlFontSize;
 setHtmlFontSize();
+
+

@@ -6,18 +6,24 @@
 
 <script>
 import * as echarts from 'echarts';
+import {request_sum_data} from "@/api/home-page/event-sum";
 
 export default {
   name: "sum",
   data() {
     return {
       chartInstance: null,
-      allData: null
+      allData: null,
+      sumData: null
     }
   },
   mounted(){
     this.$nextTick(() => {
-      this.initChart()
+      //请求后端数据，在响应数据回调函数中执行eChats数据初始化
+      request_sum_data().then(res => {
+        this.sumData = res.page.list;
+        this.initChart();
+      })
     })
     // this.getData()
     window.addEventListener("resize",this.screenAdapter)
@@ -31,10 +37,7 @@ export default {
   methods: {
     initChart(){
       this.chartInstance = echarts.init(document.getElementById('pie-chart')) //chalk
-      const initOption = {
-        // backgroundColor:'transparent',
-      }
-      this.chartInstance.setOption(initOption)
+
       this.updateChart()
     },
 
@@ -74,7 +77,9 @@ export default {
 
           data: [
             {
-              name:'人员逃脱' + '\n' + '\n'+'20',  //不同事件则用变量名 item.name+item.number
+              // name:'人员逃脱' + '\n' + '\n'+'20',  //不同事件则用变量名 item.name+item.number
+              //调用后端数据
+              name: this.sumData[index].typeName + '\n' + '\n'+ this.sumData[index].warningNumber,  //不同事件则用变量名 item.name+item.number
               value: 100, //接入后台数据，可将value写成item.number,number代表传入的数字的变量名
               itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 1, 0, 0,[
@@ -96,7 +101,6 @@ export default {
       const dataOption = {
         series:seriesArr,
       }
-      console.log(seriesArr)
       this.chartInstance.setOption(dataOption)
     },
 

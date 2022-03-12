@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "map",
+  name: "mappic",
   props: {},
   components: {},
   data() {

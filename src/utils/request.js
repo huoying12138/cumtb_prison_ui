@@ -19,8 +19,8 @@ const codeMessage = {
     504: '网关超时。',
 }
 
-//异常处理程序
-const validateStatus = function (status) {
+// 异常处理程序
+const validateStatus1 = function (status) {
     if (status >= 200 && status < 300) {
         return true;
     } else {
@@ -28,8 +28,15 @@ const validateStatus = function (status) {
         return false;
     }
 }
+// 创建axios实例
+const service = axios.create({
+    // axios中请求配置有baseURL选项，表示请求URL公共部分
+    baseURL: process.env.VUE_APP_BASE_API,
+    // 超时
+    timeout: 10000,
+    validateStatus: validateStatus1
+})
 
-axios.create({validateStatus});
 
 /**
  * Requests a URL, returning a promise.
@@ -39,12 +46,14 @@ axios.create({validateStatus});
  * @return {object}           An object containing either "data" or "err"
  */
 
-export async function request(url, options) {
-    const res = await axios.request({url, ...options});
-    if (res.data.code === 200) {
+export async function request(config) {
+
+    const res = await service.request(config);
+    //拿到json格式的data数据
+    if (res.status === 200) {
         return res.data;
     }
-    Notification.error({title: "", message: res.data.message});
+    Notification.error({title: "", message: res.data.msg});
 }
 
 export function queryString(params) {
@@ -67,14 +76,45 @@ export function queryString(params) {
 }
 
 export async function get(url, options) {
-    return await request(url, {method: "GET", ...options});
+    return await request({
+        url: url,
+        method: 'get',
+        ...options
+    });
 }
 
 export async function post(url,options){
     options.headers={'Content-Type':'application/json;charset=utf-8'};
-    return await request(url,{methods:"POST",...options});
+    return await request({
+        url: url,
+        method: 'post',
+        ...options
+    });
 }
 
 export async function postForm(url,options){
-    return await request(url,{methods:"POST",...options});
+    return await request({
+        url: url,
+        method: 'post',
+        ...options
+    });
 }
+// 添加请求拦截器
+service.interceptors.request.use(config => {
+    // 在发送请求之前做些什么
+    return config
+}, error => {
+    // 对请求错误做些什么
+    return Promise.reject(error)
+})
+
+// 添加响应拦截器
+axios.interceptors.response.use(response => {
+    // 对响应数据做点什么
+    return response
+}, error => {
+    // 对响应错误做点什么
+    return Promise.reject(error)
+})
+
+export default service
