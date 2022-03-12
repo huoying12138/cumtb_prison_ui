@@ -1,5 +1,5 @@
 <template>
-  <div class="login" :style="scaleFun">
+  <div class="login" ref="cont">
     <el-form class="login-form"  ref="loginForm" :model="loginForm" :rules="loginRules">
       <h3 class="title">监所突发事件预警系统</h3>
       <el-form-item prop="username">
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import {useIndex} from "@/utils/useDraw";
+
 export default {
   name: "index",
   props: {},
@@ -30,6 +32,13 @@ export default {
     scaleFun:function () {
       return `transform:translate(-50%, -50%) scale(1.2)`
     }
+  },
+  mounted() {
+    //适配屏幕
+    const {calcRate, windowDraw } = useIndex(this.$refs.cont)
+    // todo 屏幕适应
+    windowDraw()
+    calcRate()
   },
   data() {
     return {
@@ -75,9 +84,14 @@ export default {
   background-image: url("../../assets/login-background.png");
   background-size: cover;
   position: absolute;
-  top: 50%;
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform-origin: center center;*/
+
+  top: 49%;
   left: 50%;
-  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  transform-origin: left top;
 }
 
 .login-form {

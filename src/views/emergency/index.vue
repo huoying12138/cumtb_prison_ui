@@ -1,5 +1,5 @@
 <template>
-  <div class="content" :style="scaleFun">
+  <div class="content" ref="cont">
     <div class="header">
       <div class="nav" style="float: right;">
         <el-button-group>
@@ -62,12 +62,20 @@
 <script>
 import emergencyTable from '@/components/emergencyTable'
 import createDocument from '@/components/createDocument'
+import {useIndex} from "@/utils/useDraw";
 
 
 export default {
   name: "index",
   props: {},
   components: {emergencyTable,createDocument},
+  mounted() {
+    //适配屏幕
+    const {calcRate, windowDraw } = useIndex(this.$refs.cont)
+    // todo 屏幕适应
+    windowDraw()
+    calcRate()
+  },
   computed:{
     //设置初始页面放缩比例
     scaleFun:function () {
@@ -125,9 +133,14 @@ export default {
   background-size: cover;
   font-size: 0.3rem;
   position: absolute;
-  top: 50%;
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform-origin: center center;*/
+
+  top: 49%;
   left: 50%;
-  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  transform-origin: left top;
 }
 .header{
   height: 1rem;

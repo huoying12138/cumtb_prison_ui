@@ -1,5 +1,5 @@
 <template>
-  <div class="content" :style="scaleFun">
+  <div class="content" ref="cont">
     <div class="header">
       <div class="nav" style="float: right;">
         <el-button-group>
@@ -49,6 +49,7 @@
 
 <script>
 import eventTable from '@/components/eventTable'
+import {useIndex} from "@/utils/useDraw";
 // import 'element-ui/lib/theme-chalk/index.css';
 // import '../../assets/global.css'
 
@@ -56,6 +57,13 @@ export default {
   name: "index",
   props: {},
   components: {eventTable,},
+  mounted() {
+    //适配屏幕
+    const {calcRate, windowDraw } = useIndex(this.$refs.cont)
+    // todo 屏幕适应
+    windowDraw()
+    calcRate()
+  },
   data() {
     return {
       formInline: {
@@ -104,9 +112,14 @@ export default {
   background-size: cover;
   font-size: 0.3rem;
   position: absolute;
-  top: 50%;
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform-origin: center center;*/
+
+  top: 49%;
   left: 50%;
-  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  transform-origin: left top;
 }
 .header{
   height: 1rem;
