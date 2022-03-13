@@ -6,7 +6,7 @@
 
 <script>
 import * as echarts from 'echarts';
-import {request_sum_data} from "@/api/home-page/event-sum";
+import {get_sum_data} from "@/api/home-page/event-sum";
 
 export default {
   name: "sum",
@@ -14,15 +14,48 @@ export default {
     return {
       chartInstance: null,
       allData: null,
-      sumData: null
+      sumData: [
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+        {
+          typeName: '人员逃脱',
+          warningNumber: '0'
+        },
+      ]
     }
   },
   mounted(){
     this.$nextTick(() => {
       //请求后端数据，在响应数据回调函数中执行eChats数据初始化
-      request_sum_data().then(res => {
+      get_sum_data().then(res => {
+        console.log(res.page.list)
         this.sumData = res.page.list;
         this.initChart();
+      }).catch(err => {
+        console.log(err)
+        this.initChart()
       })
     })
     // this.getData()
@@ -79,7 +112,7 @@ export default {
             {
               // name:'人员逃脱' + '\n' + '\n'+'20',  //不同事件则用变量名 item.name+item.number
               //调用后端数据
-              name: this.sumData[index].typeName + '\n' + '\n'+ this.sumData[index].warningNumber,  //不同事件则用变量名 item.name+item.number
+              name: (this.sumData[index].typeName) + '\n' + '\n'+ (this.sumData[index].warningNumber),  //不同事件则用变量名 item.name+item.number
               value: 100, //接入后台数据，可将value写成item.number,number代表传入的数字的变量名
               itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 1, 0, 0,[
