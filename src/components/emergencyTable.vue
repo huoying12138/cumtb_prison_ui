@@ -1,6 +1,6 @@
 <template>
   <el-table
-      :data="tableData"
+      :data="fileList"
       style="font-size: 0.3rem;width: 100%;"
       :header-cell-style="{
         'background-color': 'rgb(160,193,243)',
@@ -10,29 +10,33 @@
       max-height="800"
   >
     <el-table-column
-        prop="number"
+        prop="fileNumber"
         label="序号"
-        witdh="150"
+        witdh="250"
     >
     </el-table-column>
     <el-table-column
-        prop="documentName"
+        prop="fileName"
         label="档案名称"
         width="300"
     >
     </el-table-column>
     <el-table-column
-        prop="documentType"
+        prop="fileTypeNumber"
         label="档案类别"
-        width="300"
+        width="200"
     >
     </el-table-column>
     <el-table-column
-        prop="documentLevel"
+        prop="fileLeverNumber"
         label="档案等级"
+        width="200">
+    </el-table-column>
+    <el-table-column
+        prop="fileTypePerson"
+        label="提交人员"
         width="400">
     </el-table-column>
-
     <el-table-column
         label="操作"
         width="500"
@@ -46,7 +50,7 @@
 
         <el-button
             style="font-size: 0.2rem"
-            @click.native.prevent="deleteRow(scope.$index, tableData)"
+            @click.native.prevent="deleteRow(scope.$index, fileList)"
             type="danger"
             icon="el-icon-delete"
         >
@@ -59,99 +63,55 @@
 
 <script>
 
+import {delete_file_list, get_file_list} from "@/api/emergencyPage/fileList";
+
 export default {
   name: 'emergencyTable',
+  data() {
+    return {
+      fileList:[{
+        fileNumber: '001',
+        fileName: '档案01',
+        fileTypeNumber: '火灾',
+        fileLeverNumber: '一级严重',
+        fileTypePerson: 'admin'
+      }],
+    }
+  },
+  created() {
+    //请求fileList数据
+    get_file_list().then(res => {
+      const list = res.page.list;
+      console.log(list)
+      this.fileList = list;
+    }).catch(err =>{
+      //todo
+    })
+  },
   methods: {
     //编辑事件
     handleEdit(index, row) {
       confirm(index + " " + row);
+
     },
     //删除事件记录
     deleteRow(index, rows) {
       let msg = "您真的确定要删除吗？\n\n请确认！";
       if (confirm(msg)==true){
-        return  rows.splice(index, 1);
+        console.log(this.fileList)
+        delete_file_list(this.fileList[index].id).then(res => {
+          if(res.msg == 'success'){
+            alert("删除成功");
+            return  rows.splice(index, 1);
+          }
+        })
       }else{
+        alert("删除失败");
         return false;
       }
 
     }
   },
-  data() {
-    return {
-      tableData: [{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },{
-        number: '001',
-        documentName: '档案01',
-        documentType: '火灾',
-        documentLevel: '一级严重',
-      },]
-    }
-  }
 }
 
 

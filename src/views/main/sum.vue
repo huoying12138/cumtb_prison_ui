@@ -6,7 +6,7 @@
 
 <script>
 import * as echarts from 'echarts';
-import {get_sum_data} from "@/api/home-page/event-sum";
+import {get_sum_data} from "@/api/homePage/eventSum";
 
 export default {
   name: "sum",
