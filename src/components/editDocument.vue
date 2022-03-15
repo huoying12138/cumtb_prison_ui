@@ -22,65 +22,55 @@
       <el-form-item label="提交人员" prop="file_type_person">
         <el-input v-model="ruleForm.file_type_person"></el-input>
       </el-form-item>
-<!--      <el-form-item label="档案编号" prop="file_number">-->
-<!--        <el-select v-model="ruleForm.file_number" placeholder="请选择事件位置">-->
-<!--          <el-option label="位置一" value="shanghai"></el-option>-->
-<!--          <el-option label="位置二" value="beijing"></el-option>-->
-<!--        </el-select>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="事件时间" required>-->
-<!--        <el-col :span="11">-->
-<!--          <el-form-item prop="date1">-->
-<!--            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col class="line" :span="2">-</el-col>-->
-<!--        <el-col :span="11">-->
-<!--          <el-form-item prop="date2">-->
-<!--            <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="识别设备" prop="device">-->
-<!--        <el-input v-model="ruleForm.device"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="事件类型" prop="event">-->
-<!--        <el-input v-model="ruleForm.event"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="类别号" prop="type">-->
-<!--        <el-input v-model="ruleForm.type"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="报警状态" prop="alarm">-->
-<!--      <el-input v-model="ruleForm.alarm"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="其他" prop="desc">-->
-<!--        <el-input v-model="ruleForm.desc"></el-input>-->
-<!--      </el-form-item>-->
+      <!--      <el-form-item label="档案编号" prop="file_number">-->
+      <!--        <el-select v-model="ruleForm.file_number" placeholder="请选择事件位置">-->
+      <!--          <el-option label="位置一" value="shanghai"></el-option>-->
+      <!--          <el-option label="位置二" value="beijing"></el-option>-->
+      <!--        </el-select>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="事件时间" required>-->
+      <!--        <el-col :span="11">-->
+      <!--          <el-form-item prop="date1">-->
+      <!--            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        <el-col class="line" :span="2">-</el-col>-->
+      <!--        <el-col :span="11">-->
+      <!--          <el-form-item prop="date2">-->
+      <!--            <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="识别设备" prop="device">-->
+      <!--        <el-input v-model="ruleForm.device"></el-input>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="事件类型" prop="event">-->
+      <!--        <el-input v-model="ruleForm.event"></el-input>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="类别号" prop="type">-->
+      <!--        <el-input v-model="ruleForm.type"></el-input>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="报警状态" prop="alarm">-->
+      <!--      <el-input v-model="ruleForm.alarm"></el-input>-->
+      <!--      </el-form-item>-->
+      <!--      <el-form-item label="其他" prop="desc">-->
+      <!--        <el-input v-model="ruleForm.desc"></el-input>-->
+      <!--      </el-form-item>-->
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">创建档案</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交新档案</el-button>
+        <el-button @click="resetForm('ruleForm')">恢复</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
-import {save_file_list} from "@/api/emergencyPage/fileList";
-import {globalBus} from "@/main";
+import { update_file_list_by_id} from "@/api/emergencyPage/fileList";
 
 export default {
-  props: ['parentCenterDialogVisible'],
+  props: ['parentCenterDialogVisible','ruleForm', 'getFileList'],
   data() {
     return {
       isCloseDialog: this.parentCenterDialogVisible,
-      ruleForm: {
-        id: 1,
-        file_number: '02015',
-        file_name: '群体斗殴档案5',
-        file_address: '/file/02',
-        file_type_number: '02',
-        file_lever_number: '01',
-        file_type_person: 'admin01',
-      },
       rules: {
         id: [
           { required: true, message: '请输入档案id', trigger: 'blur' },
@@ -116,6 +106,16 @@ export default {
       }
     };
   },
+  watch: {
+    ruleForm:{
+      handler (newVal, oldVal) {
+        //todo
+      },
+      deep: true
+    }
+  },
+  created() {
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -129,16 +129,17 @@ export default {
             fileTypePerson: this.ruleForm.file_type_person,
             id:  this.ruleForm.id
           }
-           save_file_list(fileList).then(res => {
-             if(res.status === 200)
-               alert("创建成功！")
-             //设置false关闭父组件的dialog
-              this.$emit('update:parentCenterDialogVisible', false)
-
-             //使用globalBus与emergencyTable通信，触发调用其getFileList方法
-             globalBus.$emit('getFileList');
-         })
-        } else {
+          //提交id修改
+          update_file_list_by_id(fileList).then(res => {
+            if(res.status === 200)
+              alert("编辑成功！")
+            //设置false关闭父组件的dialog
+            this.$emit('update:parentCenterDialogVisible', false)
+            //调用父组件刷新表格
+            this.getFileList();
+          })
+        }
+        else {
           alert("创建失败，请重新输入！")
           return false;
         }

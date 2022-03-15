@@ -51,7 +51,7 @@ export async function request(config) {
     const res = await service.request(config);
     //拿到json格式的data数据
     if (res.status === 200) {
-        return res.data;
+        return res;
     }
     Notification.error({title: "", message: res.data.msg});
 }

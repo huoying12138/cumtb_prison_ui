@@ -49,11 +49,13 @@
     </div>
     <div class="third-row">
       <el-dialog
-          title="输入档案信息："
+          title="请输入档案信息"
           :visible.sync="centerDialogVisible"
           width="40%"
-          center>
-        <create-document/>
+          :modal='false'
+          center
+      >
+        <create-document :parentCenterDialogVisible.sync="centerDialogVisible"/>
       </el-dialog>
     </div>
   </div>
@@ -68,7 +70,7 @@ import {useIndex} from "@/utils/useDraw";
 export default {
   name: "index",
   props: {},
-  components: {emergencyTable,createDocument},
+  components: {emergencyTable,createDocument,},
   mounted() {
     //适配屏幕
     const {calcRate, windowDraw } = useIndex(this.$refs.cont)

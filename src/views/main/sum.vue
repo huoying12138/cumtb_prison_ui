@@ -50,8 +50,7 @@ export default {
     this.$nextTick(() => {
       //请求后端数据，在响应数据回调函数中执行eChats数据初始化
       get_sum_data().then(res => {
-        console.log(res.page.list)
-        this.sumData = res.page.list;
+        this.sumData = res.data.page.list;
         this.initChart();
       }).catch(err => {
         console.log(err)
