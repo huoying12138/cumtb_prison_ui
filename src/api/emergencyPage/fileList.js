@@ -1,3 +1,4 @@
+
 import {request} from "@/utils/request";
 
 //获取文件档案
@@ -37,5 +38,14 @@ export function update_file_list_by_id(fileList){
         url: '/prison/filelist/update/',
         method: 'post',
         data: fileList,
+    })
+}
+
+//查询指定档案类别type=01  档案等级lever=02  page  limit
+export function get_file_list_by_type_lever(type_level){
+    return request({
+        url: '/prison/filelist/list/',
+        method: 'get',
+        params: type_level,
     })
 }

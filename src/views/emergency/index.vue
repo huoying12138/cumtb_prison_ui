@@ -19,24 +19,32 @@
         </h2>
       </div>
       <div class="f-right">
-        <el-form :inline="true" :model="formInline" class="demo-form-inline">
-          <el-form-item label="档案类别">
-            <el-select v-model="formInline.type" placeholder="档案类别">
-              <el-option label="1" value="1"></el-option>
-              <el-option label="2" value="2"></el-option>
+        <el-form :inline="true" :model="formInline" class="demo-form-inline" ref="formInline">
+          <el-form-item label="档案类别" prop="type">
+            <el-select v-model="formInline.type" placeholder="档案类别" :loading="loading" @blur="blurType" @focus="requestType" @change="setType">
+              <el-option
+                  v-for="item in fileType"
+                  :key="item.fileTypeNumber"
+                  :label="item.fileTypeNumber + item.fileTypeName"
+                  :value="item.fileTypeNumber"
+              ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="档案等级">
-            <el-select v-model="formInline.level" placeholder="档案等级">
-              <el-option label="001" value="001"></el-option>
-              <el-option label="002" value="002"></el-option>
+          <el-form-item label="档案等级" prop="lever">
+            <el-select v-model="formInline.lever" placeholder="档案等级" :loading="loading" @blur="blurLevel" @focus="requestLevel" @change="setLevel">
+              <el-option
+                  v-for="item in fileLevel"
+                  :key="item.fileLeverNumber"
+                  :label="item.fileLeverNumber +item.fileLevelName"
+                  :value="item.fileLeverNumber"
+                  ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="queryTypeLevel">查询</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onReset">重置</el-button>
+            <el-button type="primary" @click="onResetForm('formInline')">重置</el-button>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="centerDialogVisible = true">新建档案</el-button>
@@ -65,6 +73,8 @@
 import emergencyTable from '@/components/emergencyTable'
 import createDocument from '@/components/createDocument'
 import {useIndex} from "@/utils/useDraw";
+import {get_file_level, get_file_type} from "@/api/emergencyPage/fileTypeLevel";
+import {globalBus} from "@/main";
 
 
 export default {
@@ -86,14 +96,91 @@ export default {
   },
   data() {
     return {
+      loading: false,
+      //两个档案类别，档案等级初始一条数据
+      fileType: [
+        {
+          fileTypeNumber: '01',
+          fileTypeName: '火灾'
+        }
+      ],
+      fileLevel: [
+        {
+          fileLeverNumber: '01',
+          fileLevelName: '一级',
+        }
+      ],
       centerDialogVisible: false,
       formInline: {
-        time: '',
-        id: ''
+        type: '',
+        lever: ''
       }
     }
   },
   methods: {
+    //重置两个下拉框，并触发emergencyTable重新请求所有档案数据，刷新页面
+    onResetForm(formInline){
+      this.$refs[formInline].resetFields();
+      globalBus.$emit('getFileList');
+    },
+    //点击查询，进行type和level档案联合查询，并触发emergencyTable刷新列表结果
+    queryTypeLevel(){
+      //同时开始请求fileList数据，触发emergencyTable刷新查询结果
+      globalBus.$emit('queryTypeLevel', this.formInline)
+    },
+    //下拉框选中值设置表单中的formInline.type
+    blurType(){
+      // console.log('blur' + this.formInline.type)
+    },
+    blurLevel(){
+      // console.log('blur' + this.formInline.type)
+    },
+    //下拉框值选中发生改变
+    setType(val){
+      this.formInline.type = val;
+      //同时开始请求fileList数据，触发emergencyTable刷新查询结果
+      globalBus.$emit('getFileType', this.formInline.type)
+    },
+    //下拉框一旦聚焦，开始请求后端
+    requestLevel(){
+      this.loading=true;
+      get_file_level().then(res =>{
+        if(res.status === 200){
+          this.fileLevel = res.data.page.list.map(item =>{
+            return {
+              fileLeverNumber: item.fileLeverNumber,
+              fileLevelName: item.fileLevelName
+            }
+          })
+          this.loading=false;
+        }
+      }).catch(err => {
+        //todo
+      })
+    },
+
+    setLevel(val){
+      this.formInline.lever = val;
+      //同时开始请求fileList数据，触发emergencyTable刷新查询结果
+      globalBus.$emit('getFileLevel', this.formInline.lever)
+    },
+    //下拉框一旦聚焦，开始请求后端
+    requestType(){
+      this.loading=true;
+      get_file_type().then(res =>{
+        if(res.status === 200){
+          this.fileType = res.data.page.list.map(item =>{
+            return {
+              fileTypeNumber: item.fileTypeNumber,
+              fileTypeName: item.fileTypeName
+            }
+          })
+          this.loading=false;
+        }
+      }).catch(err => {
+        //todo
+      })
+    },
     onSubmit() {
       let msg = "请确认！";
       if (confirm(msg)==true){

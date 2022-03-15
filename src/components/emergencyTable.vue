@@ -89,7 +89,12 @@
 
 <script>
 
-import {delete_file_list, get_file_list, get_file_list_by_id} from "@/api/emergencyPage/fileList";
+import {
+  delete_file_list,
+  get_file_list,
+  get_file_list_by_id,
+  get_file_list_by_type_lever
+} from "@/api/emergencyPage/fileList";
 import editDocument from "@/components/editDocument";
 import {globalBus} from "@/main";
 
@@ -128,6 +133,36 @@ export default {
       this.getFileList();
     })
 
+    //监听emergencyPage的档案类别的单个type查询，更新页面结果
+    globalBus.$on('getFileType', (fileType)=>{
+      get_file_list_by_type_lever({type: fileType}).then(res => {
+        const list = res.data.page.list;
+        this.fileList = list;
+      }).catch(err =>{
+        //todo
+      })
+    })
+
+
+    //监听emergencyPage的档案类别的单个type查询，更新页面结果
+    globalBus.$on('getFileLevel', (fileLevel)=>{
+      get_file_list_by_type_lever({lever: fileLevel}).then(res => {
+        const list = res.data.page.list;
+        this.fileList = list;
+      }).catch(err =>{
+        //todo
+      })
+    })
+
+    //监听emergencyPage的档案类别的type和Level的联合查询，更新页面结果
+    globalBus.$on('queryTypeLevel', (fileTypeLevel) => {
+      get_file_list_by_type_lever({type: fileTypeLevel.type, lever: fileTypeLevel.lever}).then(res => {
+        const list = res.data.page.list;
+        this.fileList = list;
+      }).catch(err =>{
+        //todo
+      })
+    })
   },
 
   methods: {
