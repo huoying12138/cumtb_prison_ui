@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @author yang
+ * @desc emergencyPage请求档案列表
+ */
 import {request} from "@/utils/request";
 
 //获取文件档案
