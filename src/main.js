@@ -13,7 +13,8 @@ Vue.use(Element)
 import "./assets/global.css"
 
 import store from "@/store";
-
+import mock from './mock/mock.js'
+require('./mock/mock.js')
 //利用全局Bus实现跨组件通信$on $emit  createDocument in index及editDocument in emergencyTable in index之间通信
 export const globalBus = new Vue();
 Vue.config.productionTip = false

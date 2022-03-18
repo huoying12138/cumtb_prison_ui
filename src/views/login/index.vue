@@ -22,6 +22,7 @@
 
 <script>
 import {useIndex} from "@/utils/useDraw";
+import {request} from "@/utils/request";
 
 export default {
   name: "index",
@@ -65,6 +66,7 @@ export default {
     }
   },
   methods: {
+
     //验证登录，成功则跳转至主页
     gotoMain(){
       this.$router.push({

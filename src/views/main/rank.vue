@@ -4,21 +4,37 @@
 
 <script>
 import * as echarts from 'echarts';
+import {request} from "@/utils/request";
 
 require('echarts/theme/macarons');//引入主题
 
 export default {
   data() {
     return {
-      chartPie: null
+      chartPie: null,
+      value: 0.7
     }
   },
   mounted() {
     this.$nextTick(() => {
-      this.drawPieChart();
+      this.get_sum_data().then(res =>{
+        this.value = res.data.data.score
+        console.log(res.data)
+        this.drawPieChart();
+
+      }).catch(err =>{
+        //todo
+        this.drawPieChart();
+      })
     })
   },
   methods: {
+    get_sum_data(){
+      return request({
+        url: '/prison/scores',
+        method: 'get',
+      })
+    },
     drawPieChart() {
       this.chartPie = echarts.init(document.getElementById('chartPie'), 'macarons');
       this.chartPie.setOption({
@@ -98,7 +114,7 @@ export default {
             },
             data: [
               {
-                value: 0.7,
+                value: this.value,
                 name: '安全等级'
               }
             ]
