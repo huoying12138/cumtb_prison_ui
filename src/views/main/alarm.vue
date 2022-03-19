@@ -52,6 +52,7 @@
       <el-dialog
           title="输入档案信息："
           :visible.sync="centerDialogVisible"
+          :modal="false"
           width="40%"
           center>
         <create-document/>

@@ -17,9 +17,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      //主页接入rank安全等级数据
       this.get_sum_data().then(res =>{
         this.value = res.data.data.score
-        console.log(res.data)
         this.drawPieChart();
 
       }).catch(err =>{

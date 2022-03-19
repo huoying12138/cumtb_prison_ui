@@ -245,10 +245,10 @@ export default {
 
 <style lang="scss">
 
-.el-table  .cell {
-  line-height: 0.3rem;
-}
-.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
-  border-bottom: 3px solid rgb(123,169,240);
-}
+//.el-table  .cell {
+//  line-height: 0.3rem;
+//}
+//.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+//  border-bottom: 3px solid rgb(123,169,240);
+//}
 </style>

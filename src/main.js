@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from "@/store";
 
 // 将自动注册所有组件为全局组件
 import dataV from '@jiaminghi/data-view'
@@ -12,8 +13,11 @@ Vue.use(Element)
 
 import "./assets/global.css"
 
-import store from "@/store";
-import mock from './mock/mock.js'
+import requestGen from '@/utils/requestGen' // api: https://github.com/axios/axios
+
+Vue.prototype.$http = requestGen // ajax请求方法
+
+
 require('./mock/mock.js')
 //利用全局Bus实现跨组件通信$on $emit  createDocument in index及editDocument in emergencyTable in index之间通信
 export const globalBus = new Vue();

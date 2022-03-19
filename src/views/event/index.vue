@@ -21,28 +21,35 @@
       <div class="f-right">
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
           <el-form-item label="时间">
-            <el-select v-model="formInline.time" placeholder="时间">
+            <el-select v-model="formInline.time" placeholder="时间" @change="setTime">
               <el-option label="2016-05-03" value="2016-05-03"></el-option>
               <el-option label="2016-05-03" value="2016-05-03"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="民警编号">
-            <el-select v-model="formInline.id" placeholder="民警编号">
-              <el-option label="007" value="007"></el-option>
-              <el-option label="007" value="007"></el-option>
+          <el-form-item label="">
+            <el-select v-model="formInline.id" placeholder="民警编号" @change="setNumber">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+              <el-option label="3" value="3"></el-option>
+              <el-option label="4" value="4"></el-option>
+              <el-option label="5" value="5"></el-option>
+              <el-option label="6" value="6"></el-option>
+              <el-option label="7" value="7"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">查询</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onReset">重置</el-button>
+<!--            <el-button type="primary" @click="onReset">重置</el-button>-->
+            <el-button  type="danger" @click="deleteHandle()" :disabled="len">批量删除</el-button>
+            <el-button type="primary" @click="newEvent">新增</el-button>
           </el-form-item>
         </el-form>
       </div>
     </div>
     <div class="second-row">
-      <event-table/>
+      <event-table1/>
     </div>
   </div>
 </template>
@@ -50,13 +57,15 @@
 <script>
 import eventTable from '@/components/eventTable'
 import {useIndex} from "@/utils/useDraw";
+import eventTable1 from "@/components/eventTable1";
+import {globalBus} from "@/main";
 // import 'element-ui/lib/theme-chalk/index.css';
 // import '../../assets/global.css'
 
 export default {
   name: "index",
   props: {},
-  components: {eventTable,},
+  components: {eventTable,eventTable1},
   mounted() {
     //适配屏幕
     const {calcRate, windowDraw } = useIndex(this.$refs.cont)
@@ -66,11 +75,18 @@ export default {
   },
   data() {
     return {
+      len: true,
       formInline: {
         time: '',
         id: ''
       }
     }
+  },
+  created() {
+    //监听eventTable1的全选事件
+    globalBus.$on('len', (len)=>{
+      this.len = len
+    })
   },
   computed:{
     //设置初始页面放缩比例
@@ -79,13 +95,25 @@ export default {
     }
   },
   methods: {
+    //下拉框值选中发生改变to eventTable1
+    setNumber(val){
+      this.formInline.id = val;
+      //同时开始请求fileList数据，触发emergencyTable刷新查询结果
+      globalBus.$emit('setNumber', this.formInline.id)
+    },
+    setTime(){
+      //todo
+    },
     onSubmit() {
-      let msg = "请确认！";
-      if (confirm(msg)==true){
-        return  true;
-      }else{
-        return false;
-      }
+      //触发eventTable1的查询列表时间
+      globalBus.$emit('getEventList', )
+    },
+    newEvent() {
+      //触发eventTable1的查询列表时间
+      globalBus.$emit('newEvent', )
+    },
+    deleteHandle(){
+      globalBus.$emit('deleteHandle')
     },
     onReset() {
       let msg = "请确认！";
@@ -151,6 +179,7 @@ export default {
     font-size: 0.3rem;
     height: 0.5rem;
   }
+
   .el-form-item__label {
     color: white;
   }

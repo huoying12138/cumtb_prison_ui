@@ -1,5 +1,6 @@
 import axios from "axios";
 import {Notification} from "element-ui";
+import { Message } from 'element-ui';//第二种请求后台数据方式，使用模板vue生成工具
 
 const codeMessage = {
     200: '服务器成功给返回请求数据',
@@ -53,6 +54,7 @@ export async function request(config) {
     if (res.status === 200) {
         return res;
     }
+    // Message.error(res.data.msg)
     Notification.error({title: "", message: res.data.msg});
 }
 

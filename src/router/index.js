@@ -11,6 +11,7 @@ Vue.use(Router)
 
 import test from '@/components/tets'
 import sum from '@/views/main/sum'
+import identify from "@/components/eventTable1";
 
 
 export const constantRoutes = [
@@ -41,6 +42,10 @@ export const constantRoutes = [
     {//测试sum
         path: '/sum',
         component: sum
+    },
+    {//测试sum
+        path: '/identify',
+        component: identify
     }
 
 ]
