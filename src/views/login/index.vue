@@ -44,25 +44,25 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: 'admin',
         rememberMe: false,
         code: '',
         uuid: ''
       },
-      // // 验证码开关
-      // captchaOnOff: true,
-      // loginRules: {
-      //   username: [
-      //     { required: true, trigger: 'blur', message: '请输入您的账号'}
-      //   ],
-      //   password: [
-      //     { required: true, trigger: 'blur', message: '请输入您的密码'}
-      //   ],
-      //   code: [
-      //     { required: true, trigger: 'blur', message: '请输入验证码'}
-      //   ]
-      // }
+      // 验证码开关
+      captchaOnOff: false,
+      loginRules: {
+        username: [
+          { required: true, trigger: 'blur', message: '请输入您的账号'}
+        ],
+        password: [
+          { required: true, trigger: 'blur', message: '请输入您的密码'}
+        ],
+        code: [
+          { required: true, trigger: 'blur', message: '请输入验证码'}
+        ]
+      }
     }
   },
   methods: {
