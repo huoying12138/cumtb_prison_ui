@@ -4,7 +4,7 @@
 	<a href="https://gitee.com/纸鸢/ cumtb_prison_ui/"><img src="https://img.shields.io/badge/cumtb_prison_ui-v1.0.0-brightgreen.svg"></a>
 	<a href="https://gitee.com/纸鸢/ cumtb_prison_ui/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
-</p>
+
 ## 项目简介
 
 监所预警系统
